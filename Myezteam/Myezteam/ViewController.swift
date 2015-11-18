@@ -11,14 +11,21 @@ import UIKit
 class ViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Properties
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var mealNameLabel: UILabel!
-
+    @IBOutlet weak var email: UITextField!
+    @IBOutlet weak var password: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set background image
+        //self.view.backgroundColor = UIColor(patternImage: UIImage(named: "loginBackground.png"))
+//        let yourImage = UIImage(named: "loginBackground.png")
+//        let imageview = UIImageView(image: yourImage)
+//        self.view.addSubview(imageview)
+        
         // Handle the text field’s user input through delegate callbacks.
-        nameTextField.delegate = self
+        email.delegate = self
+        password.delegate = self
     }
 
     // MARK: UITextFieldDelegate
@@ -40,7 +47,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
 //    }
     
     @IBAction func login(sender: UIButton) {
-    
+
+        println("text = " + self.email.text)
+        
+       var user = User(email: self.email.text, password: self.password.text)
+        
+        user.authenticate() {
+            (data, error) -> Void in
+            println("Error = \(error)")
+            println("data = \(data)")
+        }
     }
 
     
