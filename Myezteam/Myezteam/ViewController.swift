@@ -52,10 +52,20 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
        var user = User(email: self.email.text, password: self.password.text)
         
+        // Authenticate the user
         user.authenticate() {
-            (data, error) -> Void in
+            (token, error) -> Void in
+            // TODO: Handle the error case
             println("Error = \(error)")
-            println("data = \(data)")
+            println("token = \(token)")
+            
+            // Store the token
+            let defaults = NSUserDefaults.standardUserDefaults()
+            defaults.setObject(token, forKey: "myezteamToken")
+            
+            // Go to events page
+            var next = self.storyboard?.instantiateViewControllerWithIdentifier("EventTableViewController") as EventTableViewController
+            self.presentViewController(next, animated: true, completion: nil)
         }
     }
 

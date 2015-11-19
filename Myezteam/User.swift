@@ -27,7 +27,9 @@ class User {
     
     // MARK: Functions
     
-    
+    /**
+        Authenticates a user and returns a token
+    */
     func authenticate(callback: (String, String?) -> Void) {
         println("in authenticate")
         
