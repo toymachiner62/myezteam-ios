@@ -13,16 +13,16 @@ class Event {
     // MARK: Properties
     
     var game: String?
-    var team: String?
+    var team: Team?
     var time: String?
     
     // MARK: Initialization
     
     init() {
-        
+        self.team = Team()
     }
     
-    init(game: String, team: String, time: String) {
+    init(game: String, team: Team, time: String) {
         setAttributes(game, team: team, time: time)
         
         // Initialization should fail if there is no name or if the rating is negative.
@@ -31,52 +31,50 @@ class Event {
         //        }
     }
     
-    func setAttributes(game: String, team: String, time: String) {
-        
-        println("game = \(game)")
-        println("team = \(team)")
-        println("time = \(time)")
+    // MARK: Functions
+    
+    /**
+        Set the attributes of an event
+    */
+    func setAttributes(game: String, team: Team, time: String) {
         self.game = game
         self.team = team
         self.time = time
-        
     }
     
-    // MARK: Functions
+    /**
+        Get all the upcoming events
+    */
     func getUpcoming(callback: (NSArray?, String?) -> Void) {
-        
-        //println("In get upcoming")
         
         var request = NSMutableURLRequest(URL: NSURL(string: Constants.makeUrl("/events")))
         request.HTTPMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("Bearer 6cfee427-e2cc-4ba7-89c0-8dbfda2ce6b4", forHTTPHeaderField: "Authorization")
+        let token = NSUserDefaults.standardUserDefaults().stringForKey("myezteamToken")
+        println("token = \(token!)")
+        request.addValue("Bearer \(token!)", forHTTPHeaderField: "Authorization")
         
         var session = NSURLSession.sharedSession()
         var task = session.dataTaskWithRequest(request) {
             (data, response, error) -> Void in
-            
             //println("data = \(data)")
-            //println("response = \(response)")
-            //println("error = \(error)")
+            println("response = \(response)")
+            println("error = \(error)")
             
             if error != nil {
                 callback(nil, error.localizedDescription)
             } else {
                 var result = NSString(data: data, encoding: NSASCIIStringEncoding)
                 //println("result = \(result)")
-              
                 let newData: NSData = data
-                //println("before")
+                //println("newData = \(newData)")
                 var upcomingEvents: NSArray = NSJSONSerialization.JSONObjectWithData(newData, options: NSJSONReadingOptions.AllowFragments, error: nil) as NSArray
-                //println("FIRST EVENT = \(upcomingEvents[0])")
-                //println("after")
-              
+                //println("upcomingEvents = \(upcomingEvents)")
                 callback(upcomingEvents, nil)
             }
-
         }
         task.resume()
     }
+    
 }

@@ -48,7 +48,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func login(sender: UIButton) {
 
-        println("text = " + self.email.text)
+        //println("text = " + self.email.text)
         
        var user = User(email: self.email.text, password: self.password.text)
         
@@ -56,12 +56,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
         user.authenticate() {
             (token, error) -> Void in
             // TODO: Handle the error case
-            println("Error = \(error)")
-            println("token = \(token)")
+//            println("Error = \(error)")
+//            println("token = \(token)")
             
             // Store the token
             let defaults = NSUserDefaults.standardUserDefaults()
             defaults.setObject(token, forKey: "myezteamToken")
+            
+            let token = NSUserDefaults.standardUserDefaults().stringForKey("myezteamToken")
+            println("View ctrl token = \(token)")
             
             // Go to events page
             var next = self.storyboard?.instantiateViewControllerWithIdentifier("EventTableViewController") as EventTableViewController

@@ -17,13 +17,21 @@ class EventTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadUpcomingEvents()
+        //loadUpcomingEvents()
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+//        dispatch_async(dispatch_get_main_queue()) {
+//            //self.tableData = LatestWaitTimes
+//            self.tableView.reloadData()
+//        }
+        loadUpcomingEvents()
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,60 +49,121 @@ class EventTableViewController: UITableViewController {
         return events.count
     }
     
-    func loadUpcomingEvents() -> Void {
-        var event = Event()
-        
-        event.getUpcoming() {
-            (upcomingEvents, error) -> Void in
-        
-            //println("upcomingEvents = \(upcomingEvents)")
-            
-            //println("FIRST EVENT = \(upcomingEvents![0])")
-            
-            for currentEvent in upcomingEvents! {
-                
-                event = Event()
-                
-                //println("FULL EVENT = \(currentEvent)")
-                let name = currentEvent["name"] as NSString
-                //println("name = \(name)")
-                
-                let team_id = currentEvent["team_id"] as NSNumber
-                //println("team_id = \(team_id)")
-                
-                let start = currentEvent["start"] as NSString
-                //println("start = \(start)")
-                
-                //println("team_id = \(currentEvent.team_id as NSString)")
-                //println("start = \(currentEvent.start)")
-                event.setAttributes(name, team: team_id.stringValue, time: start)
-                
-                println("event.game = \(event.game)")
-                println("event.team = \(event.team)")
-                println("event.time = \(event.time)")
-                
-                self.events.append(event)
-            }
-        }
-    }
+    
+
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> EventTableViewCell {
-
+println("in tableView")
         let cellIdentifier = "EventTableViewCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as EventTableViewCell
 
         // Fetches the appropriate event for the data source layout.
         let event = events[indexPath.row]
         
+        println("event = \(event)")
+        
         cell.gameLabel.text = event.game
-        cell.teamLabel.text = event.team
+        cell.teamLabel.text = event.team?.name
         cell.timeLabel.text = event.time
 
 
         return cell
     }
     
+
+    func loadUpcomingEvents() -> Void {
+        var event = Event()
+        var team = Team()
+        var totalEvents: Int = 0
+        var currentEventIndex: Int = 0
+        
+        
+        // Get all the upcoming events
+        event.getUpcoming() {
+            (upcomingEvents, error) -> Void in
+            
+            println("in getUpcoming callback")
+            
+            if(upcomingEvents != nil) {
+                totalEvents = upcomingEvents!.count
+                
+                // Loop through all the events
+                for currentEvent in upcomingEvents! {
+                    currentEventIndex++
+                    
+                    
+                    
+                    //var thisEvent = Event()
+                    //var thisEvent = currentEvent
+                    //thisEvent.
+                    //println("first currentEvent = \(thisEvent)")
+                    var thisEvent = self.formatEvents(currentEvent as Dictionary)
+                    println("second thisEvent = \(thisEvent)")
+                    //let name = currentEvent["name"] as NSString
+                    
+                    //let team_id = currentEvent["team_id"] as NSNumber
+                    var team = Team()
+                    
+                    var team_id = thisEvent.team?.id!
+                    
+                    team.getTeamInfo(team_id!) {
+                        (teamInfo, error) -> Void in
+                        
+                        println("teamInfo = \(teamInfo!)")
+                        //var teamDict = teamInfo as Dictionary<String, AnyObject>?
+                        //println("name = \(teamInfo.name)")
+                        //let name = teamInfo
+                        //let name: String = "asdf"
+                        //return name
+                        
+                        var teamDict = teamInfo as Dictionary?
+                        println("teamDict = \(teamDict)")
+                        
+                        //let name = teamDict!["name"]! as NSString
+                        thisEvent.team?.name = teamDict!["name"] as NSString
+                        
+                        self.events.append(thisEvent as Event)
+                        
+                        dispatch_async(dispatch_get_main_queue()) {
+                            self.tableView.reloadData()
+                        }
+                    }
+                }
+            }
+        }
+        
+        
+        
+    }
+    
+    
+    
+
+
+    func formatEvents(currentEvent: Dictionary<String, AnyObject>) -> Event {
+        var event = Event()
+        
+        println("FULL EVENT = \(toString(currentEvent))")
+        let name = currentEvent["name"] as NSString
+        let start = currentEvent["start"] as NSString
+        let team_id = currentEvent["team_id"] as NSNumber
+        
+        event.game = name
+        event.time = start
+        event.team?.id = team_id
+        
+        //getTeamInfo(currentEvent)
+        return event
+        
+    }
+
+//    func getTeamInfo(team_id: Int) -> String {
+//        
+//        
+//    }
+
+
 
     /*
     // Override to support conditional editing of the table view.

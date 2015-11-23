@@ -31,7 +31,7 @@ class User {
         Authenticates a user and returns a token
     */
     func authenticate(callback: (String, String?) -> Void) {
-        println("in authenticate")
+        //println("in authenticate")
         
         let body = [
             "email": self.email,
@@ -45,7 +45,7 @@ class User {
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         //request.addValue("Bearer 6cfee427-e2cc-4ba7-89c0-8dbfda2ce6b4", forHTTPHeaderField: "Authorization")
         
-        //println("request.httpbody = \(request.)")
+        //println("request.httpbody = \(request)")
         
         var session = NSURLSession.sharedSession()
         var task = session.dataTaskWithRequest(request) {
@@ -59,15 +59,16 @@ class User {
                 callback("", error.localizedDescription)
             } else {
                 var result = NSString(data: data, encoding: NSASCIIStringEncoding)
-                println("DATAAA = \(data)")
-                println("RESULT = \(result)")
+//                println("DATAAA = \(data)")
+//                println("RESULT = \(result)")
                 let newData: NSData = data
                 var result2: NSDictionary = NSJSONSerialization.JSONObjectWithData(newData, options: NSJSONReadingOptions.AllowFragments, error: nil) as NSDictionary
                 let token: AnyObject? = result2["token"]!
                 
                 //var json: AnyObject? = result2.parseAs
-                println("result2 = \(result2)")
-                println("token = \(token)")
+//                println("result2 = \(result2)")
+                println("authenticate token = \(token)")
+                
                 callback(token as NSString, nil)
             }
         }

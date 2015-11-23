@@ -13,6 +13,7 @@
 		446070221BFA71A800099330 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 446070211BFA71A800099330 /* Images.xcassets */; };
 		446070251BFA71A800099330 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 446070231BFA71A800099330 /* LaunchScreen.xib */; };
 		446070311BFA71A800099330 /* MyezteamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446070301BFA71A800099330 /* MyezteamTests.swift */; };
+		44B4CBD51BFF7E7400EAAAF3 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B4CBD41BFF7E7400EAAAF3 /* Team.swift */; };
 		44C292BE1BFBB802007D84C9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C292BD1BFBB802007D84C9 /* User.swift */; };
 		44C292BF1BFBB802007D84C9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C292BD1BFBB802007D84C9 /* User.swift */; };
 		44C292C11BFCCB46007D84C9 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C292C01BFCCB46007D84C9 /* constants.swift */; };
@@ -43,6 +44,7 @@
 		4460702A1BFA71A800099330 /* MyezteamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyezteamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4460702F1BFA71A800099330 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		446070301BFA71A800099330 /* MyezteamTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyezteamTests.swift; sourceTree = "<group>"; };
+		44B4CBD41BFF7E7400EAAAF3 /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		44C292BD1BFBB802007D84C9 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = ../User.swift; sourceTree = "<group>"; };
 		44C292C01BFCCB46007D84C9 /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
 		44C292C31BFCF045007D84C9 /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				446070231BFA71A800099330 /* LaunchScreen.xib */,
 				446070181BFA71A800099330 /* Supporting Files */,
 				44C292C01BFCCB46007D84C9 /* constants.swift */,
+				44B4CBD41BFF7E7400EAAAF3 /* Team.swift */,
 			);
 			path = Myezteam;
 			sourceTree = "<group>";
@@ -233,6 +236,7 @@
 				4460701B1BFA71A800099330 /* AppDelegate.swift in Sources */,
 				44C292BE1BFBB802007D84C9 /* User.swift in Sources */,
 				44C292C41BFCF045007D84C9 /* EventTableViewCell.swift in Sources */,
+				44B4CBD51BFF7E7400EAAAF3 /* Team.swift in Sources */,
 				44C292C61BFCF872007D84C9 /* EventTableViewController.swift in Sources */,
 				44C292C81BFCF90F007D84C9 /* Event.swift in Sources */,
 				44C292C11BFCCB46007D84C9 /* constants.swift in Sources */,
