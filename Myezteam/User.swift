@@ -45,7 +45,9 @@ class User {
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         //request.addValue("Bearer 6cfee427-e2cc-4ba7-89c0-8dbfda2ce6b4", forHTTPHeaderField: "Authorization")
         
-        //println("request.httpbody = \(request)")
+       // println("request = \(request)")
+       // let test = NSString(data: request.HTTPBody!, encoding: NSASCIIStringEncoding)
+        //println("request.httpbody = \(test)")
         
         var session = NSURLSession.sharedSession()
         var task = session.dataTaskWithRequest(request) {

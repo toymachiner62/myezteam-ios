@@ -83,7 +83,7 @@ println("in tableView")
         event.getUpcoming() {
             (upcomingEvents, error) -> Void in
             
-            println("in getUpcoming callback")
+            //println("in getUpcoming callback")
             
             if(upcomingEvents != nil) {
                 totalEvents = upcomingEvents!.count
@@ -99,7 +99,7 @@ println("in tableView")
                     //thisEvent.
                     //println("first currentEvent = \(thisEvent)")
                     var thisEvent = self.formatEvents(currentEvent as Dictionary)
-                    println("second thisEvent = \(thisEvent)")
+                    //println("second thisEvent = \(thisEvent)")
                     //let name = currentEvent["name"] as NSString
                     
                     //let team_id = currentEvent["team_id"] as NSNumber
@@ -110,7 +110,7 @@ println("in tableView")
                     team.getTeamInfo(team_id!) {
                         (teamInfo, error) -> Void in
                         
-                        println("teamInfo = \(teamInfo!)")
+                        //println("teamInfo = \(teamInfo!)")
                         //var teamDict = teamInfo as Dictionary<String, AnyObject>?
                         //println("name = \(teamInfo.name)")
                         //let name = teamInfo
@@ -118,7 +118,7 @@ println("in tableView")
                         //return name
                         
                         var teamDict = teamInfo as Dictionary?
-                        println("teamDict = \(teamDict)")
+                        //println("teamDict = \(teamDict)")
                         
                         //let name = teamDict!["name"]! as NSString
                         thisEvent.team?.name = teamDict!["name"] as NSString
@@ -146,23 +146,26 @@ println("in tableView")
         
         println("FULL EVENT = \(toString(currentEvent))")
         let name = currentEvent["name"] as NSString
+        println("before")
         let start = currentEvent["start"] as NSString
+        println("after")
         let team_id = currentEvent["team_id"] as NSNumber
+
+        println("Start = \(start)")
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        let date = dateFormatter.dateFromString(start)
+        println("date = \(date)")
+        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+        dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
+        let formattedDate = dateFormatter.stringFromDate(date!)
         
         event.game = name
-        event.time = start
+        event.time = formattedDate
         event.team?.id = team_id
         
-        //getTeamInfo(currentEvent)
         return event
-        
     }
-
-//    func getTeamInfo(team_id: Int) -> String {
-//        
-//        
-//    }
-
 
 
     /*
