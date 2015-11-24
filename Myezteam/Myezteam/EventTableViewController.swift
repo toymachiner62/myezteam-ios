@@ -16,21 +16,9 @@ class EventTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //loadUpcomingEvents()
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
     override func viewWillAppear(animated: Bool) {
-//        dispatch_async(dispatch_get_main_queue()) {
-//            //self.tableData = LatestWaitTimes
-//            self.tableView.reloadData()
-//        }
         loadUpcomingEvents()
     }
 
@@ -49,81 +37,57 @@ class EventTableViewController: UITableViewController {
         return events.count
     }
     
-    
-
-
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> EventTableViewCell {
-println("in tableView")
         let cellIdentifier = "EventTableViewCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as EventTableViewCell
 
         // Fetches the appropriate event for the data source layout.
         let event = events[indexPath.row]
         
-        println("event = \(event)")
-        
-        cell.gameLabel.text = event.game
-        cell.teamLabel.text = event.team?.name
+        cell.gameLabel.text = event.name
+        cell.teamLabel.text = event.team.name
         cell.timeLabel.text = event.time
-
 
         return cell
     }
     
+    // MARK: Functions
 
+    /**
+        Get the upcoming events
+    */
     func loadUpcomingEvents() -> Void {
-        var event = Event()
-        var team = Team()
-        var totalEvents: Int = 0
-        var currentEventIndex: Int = 0
-        
         
         // Get all the upcoming events
-        event.getUpcoming() {
+        EventDao.getUpcoming() {
             (upcomingEvents, error) -> Void in
             
-            //println("in getUpcoming callback")
-            
             if(upcomingEvents != nil) {
-                totalEvents = upcomingEvents!.count
-                
+            
                 // Loop through all the events
                 for currentEvent in upcomingEvents! {
-                    currentEventIndex++
+                
+                    let name = currentEvent["name"] as NSString
+                    let start = currentEvent["start"] as NSString
+                    let teamId = currentEvent["team_id"] as NSNumber
+
+                    // Format date format
+                    let dateFormatter = NSDateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                    let date = dateFormatter.dateFromString(start)
+                    dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+                    dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
+                    let formattedDate = dateFormatter.stringFromDate(date!)
                     
-                    
-                    
-                    //var thisEvent = Event()
-                    //var thisEvent = currentEvent
-                    //thisEvent.
-                    //println("first currentEvent = \(thisEvent)")
-                    var thisEvent = self.formatEvents(currentEvent as Dictionary)
-                    //println("second thisEvent = \(thisEvent)")
-                    //let name = currentEvent["name"] as NSString
-                    
-                    //let team_id = currentEvent["team_id"] as NSNumber
-                    var team = Team()
-                    
-                    var team_id = thisEvent.team?.id!
-                    
-                    team.getTeamInfo(team_id!) {
+                    TeamDao.getTeamInfo(teamId) {
                         (teamInfo, error) -> Void in
                         
-                        //println("teamInfo = \(teamInfo!)")
-                        //var teamDict = teamInfo as Dictionary<String, AnyObject>?
-                        //println("name = \(teamInfo.name)")
-                        //let name = teamInfo
-                        //let name: String = "asdf"
-                        //return name
-                        
                         var teamDict = teamInfo as Dictionary?
-                        //println("teamDict = \(teamDict)")
+                        let teamName = teamDict!["name"]! as NSString
+                        let team = Team(id: teamId, name: teamName)
+                        let event = Event(name: name, team: team, time: formattedDate)
                         
-                        //let name = teamDict!["name"]! as NSString
-                        thisEvent.team?.name = teamDict!["name"] as NSString
-                        
-                        self.events.append(thisEvent as Event)
+                        self.events.append(event)
                         
                         dispatch_async(dispatch_get_main_queue()) {
                             self.tableView.reloadData()
@@ -132,39 +96,6 @@ println("in tableView")
                 }
             }
         }
-        
-        
-        
-    }
-    
-    
-    
-
-
-    func formatEvents(currentEvent: Dictionary<String, AnyObject>) -> Event {
-        var event = Event()
-        
-        println("FULL EVENT = \(toString(currentEvent))")
-        let name = currentEvent["name"] as NSString
-        println("before")
-        let start = currentEvent["start"] as NSString
-        println("after")
-        let team_id = currentEvent["team_id"] as NSNumber
-
-        println("Start = \(start)")
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        let date = dateFormatter.dateFromString(start)
-        println("date = \(date)")
-        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
-        dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
-        let formattedDate = dateFormatter.stringFromDate(date!)
-        
-        event.game = name
-        event.time = formattedDate
-        event.team?.id = team_id
-        
-        return event
     }
 
 

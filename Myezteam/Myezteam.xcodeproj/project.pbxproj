@@ -8,16 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		4460701B1BFA71A800099330 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4460701A1BFA71A800099330 /* AppDelegate.swift */; };
-		4460701D1BFA71A800099330 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4460701C1BFA71A800099330 /* ViewController.swift */; };
+		4460701D1BFA71A800099330 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4460701C1BFA71A800099330 /* LoginController.swift */; };
 		446070201BFA71A800099330 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4460701E1BFA71A800099330 /* Main.storyboard */; };
 		446070221BFA71A800099330 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 446070211BFA71A800099330 /* Images.xcassets */; };
 		446070251BFA71A800099330 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 446070231BFA71A800099330 /* LaunchScreen.xib */; };
 		446070311BFA71A800099330 /* MyezteamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446070301BFA71A800099330 /* MyezteamTests.swift */; };
+		446636B71C04CB5F004595A9 /* EventDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446636B61C04CB5F004595A9 /* EventDao.swift */; };
+		446636B91C04CBE4004595A9 /* TeamDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446636B81C04CBE4004595A9 /* TeamDao.swift */; };
 		44B4CBD51BFF7E7400EAAAF3 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B4CBD41BFF7E7400EAAAF3 /* Team.swift */; };
 		44C292BE1BFBB802007D84C9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C292BD1BFBB802007D84C9 /* User.swift */; };
 		44C292BF1BFBB802007D84C9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C292BD1BFBB802007D84C9 /* User.swift */; };
-		44C292C11BFCCB46007D84C9 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C292C01BFCCB46007D84C9 /* constants.swift */; };
-		44C292C21BFCCB46007D84C9 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C292C01BFCCB46007D84C9 /* constants.swift */; };
+		44C292C11BFCCB46007D84C9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C292C01BFCCB46007D84C9 /* Constants.swift */; };
+		44C292C21BFCCB46007D84C9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C292C01BFCCB46007D84C9 /* Constants.swift */; };
 		44C292C41BFCF045007D84C9 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C292C31BFCF045007D84C9 /* EventTableViewCell.swift */; };
 		44C292C61BFCF872007D84C9 /* EventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C292C51BFCF872007D84C9 /* EventTableViewController.swift */; };
 		44C292C81BFCF90F007D84C9 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C292C71BFCF90F007D84C9 /* Event.swift */; };
@@ -37,16 +39,18 @@
 		446070151BFA71A800099330 /* Myezteam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Myezteam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		446070191BFA71A800099330 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4460701A1BFA71A800099330 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4460701C1BFA71A800099330 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4460701C1BFA71A800099330 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		4460701F1BFA71A800099330 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		446070211BFA71A800099330 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		446070241BFA71A800099330 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		4460702A1BFA71A800099330 /* MyezteamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyezteamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4460702F1BFA71A800099330 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		446070301BFA71A800099330 /* MyezteamTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyezteamTests.swift; sourceTree = "<group>"; };
+		446636B61C04CB5F004595A9 /* EventDao.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDao.swift; sourceTree = "<group>"; };
+		446636B81C04CBE4004595A9 /* TeamDao.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDao.swift; sourceTree = "<group>"; };
 		44B4CBD41BFF7E7400EAAAF3 /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		44C292BD1BFBB802007D84C9 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = ../User.swift; sourceTree = "<group>"; };
-		44C292C01BFCCB46007D84C9 /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
+		44C292C01BFCCB46007D84C9 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		44C292C31BFCF045007D84C9 /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		44C292C51BFCF872007D84C9 /* EventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewController.swift; sourceTree = "<group>"; };
 		44C292C71BFCF90F007D84C9 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
@@ -91,18 +95,15 @@
 		446070171BFA71A800099330 /* Myezteam */ = {
 			isa = PBXGroup;
 			children = (
-				44C292BD1BFBB802007D84C9 /* User.swift */,
-				44C292C71BFCF90F007D84C9 /* Event.swift */,
+				446636BB1C04E80B004595A9 /* Controllers */,
+				446636BA1C04D575004595A9 /* Models */,
+				446636B51C04CB25004595A9 /* Daos */,
 				4460701A1BFA71A800099330 /* AppDelegate.swift */,
-				4460701C1BFA71A800099330 /* ViewController.swift */,
 				4460701E1BFA71A800099330 /* Main.storyboard */,
-				44C292C51BFCF872007D84C9 /* EventTableViewController.swift */,
-				44C292C31BFCF045007D84C9 /* EventTableViewCell.swift */,
 				446070211BFA71A800099330 /* Images.xcassets */,
 				446070231BFA71A800099330 /* LaunchScreen.xib */,
 				446070181BFA71A800099330 /* Supporting Files */,
-				44C292C01BFCCB46007D84C9 /* constants.swift */,
-				44B4CBD41BFF7E7400EAAAF3 /* Team.swift */,
+				44C292C01BFCCB46007D84C9 /* Constants.swift */,
 			);
 			path = Myezteam;
 			sourceTree = "<group>";
@@ -130,6 +131,36 @@
 				4460702F1BFA71A800099330 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		446636B51C04CB25004595A9 /* Daos */ = {
+			isa = PBXGroup;
+			children = (
+				446636B61C04CB5F004595A9 /* EventDao.swift */,
+				446636B81C04CBE4004595A9 /* TeamDao.swift */,
+			);
+			name = Daos;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		446636BA1C04D575004595A9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				44B4CBD41BFF7E7400EAAAF3 /* Team.swift */,
+				44C292C71BFCF90F007D84C9 /* Event.swift */,
+				44C292BD1BFBB802007D84C9 /* User.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		446636BB1C04E80B004595A9 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				44C292C51BFCF872007D84C9 /* EventTableViewController.swift */,
+				44C292C31BFCF045007D84C9 /* EventTableViewCell.swift */,
+				4460701C1BFA71A800099330 /* LoginController.swift */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,14 +263,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4460701D1BFA71A800099330 /* ViewController.swift in Sources */,
+				4460701D1BFA71A800099330 /* LoginController.swift in Sources */,
+				446636B91C04CBE4004595A9 /* TeamDao.swift in Sources */,
 				4460701B1BFA71A800099330 /* AppDelegate.swift in Sources */,
+				446636B71C04CB5F004595A9 /* EventDao.swift in Sources */,
 				44C292BE1BFBB802007D84C9 /* User.swift in Sources */,
 				44C292C41BFCF045007D84C9 /* EventTableViewCell.swift in Sources */,
 				44B4CBD51BFF7E7400EAAAF3 /* Team.swift in Sources */,
 				44C292C61BFCF872007D84C9 /* EventTableViewController.swift in Sources */,
 				44C292C81BFCF90F007D84C9 /* Event.swift in Sources */,
-				44C292C11BFCCB46007D84C9 /* constants.swift in Sources */,
+				44C292C11BFCCB46007D84C9 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,7 +282,7 @@
 			files = (
 				44C292BF1BFBB802007D84C9 /* User.swift in Sources */,
 				446070311BFA71A800099330 /* MyezteamTests.swift in Sources */,
-				44C292C21BFCCB46007D84C9 /* constants.swift in Sources */,
+				44C292C21BFCCB46007D84C9 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

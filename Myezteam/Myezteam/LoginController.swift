@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class LoginController: UIViewController, UITextFieldDelegate {
     
     // MARK: Properties
     @IBOutlet weak var email: UITextField!
@@ -16,12 +16,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Set background image
-        //self.view.backgroundColor = UIColor(patternImage: UIImage(named: "loginBackground.png"))
-//        let yourImage = UIImage(named: "loginBackground.png")
-//        let imageview = UIImageView(image: yourImage)
-//        self.view.addSubview(imageview)
         
         // Handle the text field’s user input through delegate callbacks.
         email.delegate = self
@@ -39,39 +33,39 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // Need to LOGIN here
     }
     
-
-    
     // MARK: Actions
 //    @IBAction func setDefaultLabelText(sender: UIButton) {
 //        mealNameLabel.text = "Default Text"
 //    }
     
     @IBAction func login(sender: UIButton) {
-
-        //println("text = " + self.email.text)
         
        var user = User(email: self.email.text, password: self.password.text)
         
         // Authenticate the user
         user.authenticate() {
             (token, error) -> Void in
-            // TODO: Handle the error case
-//            println("Error = \(error)")
-//            println("token = \(token)")
-            
-            // Store the token
-            let defaults = NSUserDefaults.standardUserDefaults()
-            defaults.setObject(token, forKey: "myezteamToken")
-            
-            let token = NSUserDefaults.standardUserDefaults().stringForKey("myezteamToken")
-            println("View ctrl token = \(token)")
-            
-            // Go to events page
-            var next = self.storyboard?.instantiateViewControllerWithIdentifier("EventTableViewController") as EventTableViewController
-            self.presentViewController(next, animated: true, completion: nil)
+
+            // If there is an error, display it
+            if error != nil {
+                var alert = UIAlertController(title: "Error", message: "Unable to login. Please try again", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
+            } else {
+                // Store the token
+                let defaults = NSUserDefaults.standardUserDefaults()
+                defaults.setObject(token, forKey: "myezteamToken")
+                
+                // Go to events page
+                var next = self.storyboard?.instantiateViewControllerWithIdentifier("EventTableViewController") as EventTableViewController
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.presentViewController(next, animated: true, completion: nil)
+                }
+            }
         }
     }
 
-    
 }
 

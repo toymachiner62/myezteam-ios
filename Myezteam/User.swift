@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Tom Caflisch. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class User {
     
@@ -18,11 +18,6 @@ class User {
     init(email: String, password: String) {
         self.email = email
         self.password = password
-        
-        // Initialization should fail if there is no name or if the rating is negative.
-//        if email.isEmpty || password.isEmpty {
-//            return nil
-//        }
     }
     
     // MARK: Functions
@@ -31,7 +26,6 @@ class User {
         Authenticates a user and returns a token
     */
     func authenticate(callback: (String, String?) -> Void) {
-        //println("in authenticate")
         
         let body = [
             "email": self.email,
@@ -43,35 +37,22 @@ class User {
         request.HTTPBody = NSJSONSerialization.dataWithJSONObject(body, options: NSJSONWritingOptions.allZeros, error: nil)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
-        //request.addValue("Bearer 6cfee427-e2cc-4ba7-89c0-8dbfda2ce6b4", forHTTPHeaderField: "Authorization")
-        
-       // println("request = \(request)")
-       // let test = NSString(data: request.HTTPBody!, encoding: NSASCIIStringEncoding)
-        //println("request.httpbody = \(test)")
         
         var session = NSURLSession.sharedSession()
         var task = session.dataTaskWithRequest(request) {
             (data, response, error) -> Void in
             
-            println("data = \(data)")
-            println("response = \(response)")
-            println("error = \(error)")
-            
             if error != nil {
                 callback("", error.localizedDescription)
             } else {
-                var result = NSString(data: data, encoding: NSASCIIStringEncoding)
-//                println("DATAAA = \(data)")
-//                println("RESULT = \(result)")
-                let newData: NSData = data
-                var result2: NSDictionary = NSJSONSerialization.JSONObjectWithData(newData, options: NSJSONReadingOptions.AllowFragments, error: nil) as NSDictionary
-                let token: AnyObject? = result2["token"]!
+                var result: NSDictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: nil) as NSDictionary
                 
-                //var json: AnyObject? = result2.parseAs
-//                println("result2 = \(result2)")
-                println("authenticate token = \(token)")
-                
-                callback(token as NSString, nil)
+                let token: String? = result["token"] as String?
+                if  token != nil {
+                    callback(token!, nil)
+                } else {
+                    callback("", "ERROR")
+                }
             }
         }
         task.resume()
