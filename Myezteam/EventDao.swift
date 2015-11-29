@@ -17,26 +17,35 @@ struct EventDao {
     */
     static func getUpcoming(callback: (NSArray?, String?) -> Void) {
         
-        var request = NSMutableURLRequest(URL: NSURL(string: Constants.makeUrl("/events")))
+        let request = NSMutableURLRequest(URL: NSURL(string: Constants.makeUrl("/events"))!)
         request.HTTPMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         let token = NSUserDefaults.standardUserDefaults().stringForKey("myezteamToken")
         request.addValue("Bearer \(token!)", forHTTPHeaderField: "Authorization")
         
-        var session = NSURLSession.sharedSession()
-        var task = session.dataTaskWithRequest(request) {
-            (data, response, error) -> Void in
 
-            if error != nil {
-                callback(nil, error.localizedDescription)
-            } else {
-                let newData: NSData = data
-                var upcomingEvents: NSArray = NSJSONSerialization.JSONObjectWithData(newData, options: NSJSONReadingOptions.AllowFragments, error: nil) as NSArray
-                callback(upcomingEvents, nil)
+            let session = NSURLSession.sharedSession()
+            let task = session.dataTaskWithRequest(request) {
+                (data, response, error) -> Void in
+
+                if error != nil {
+                    callback(nil, error!.localizedDescription)
+                } else {
+                    let upcomingEvents: NSArray?
+                    do {
+                        let newData: NSData = data!
+                        upcomingEvents = try NSJSONSerialization.JSONObjectWithData(newData, options: NSJSONReadingOptions.AllowFragments) as? NSArray
+                    } catch {
+                        upcomingEvents = nil
+                    }
+                    callback(upcomingEvents, nil)
+                }
             }
-        }
+        
+        
         task.resume()
+        
     }
 
 }

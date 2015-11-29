@@ -25,29 +25,31 @@ class User {
     /**
         Authenticates a user and returns a token
     */
-    func authenticate(callback: (String, String?) -> Void) {
+    func authenticate(callback: (String, String?) -> Void) throws {
         
         let body = [
             "email": self.email,
             "password": self.password
         ] as Dictionary<String, String>
         
-        var request = NSMutableURLRequest(URL: NSURL(string: Constants.makeUrl("/auth/login")))
+        let request = NSMutableURLRequest(URL: NSURL(string: Constants.makeUrl("/auth/login"))!)
         request.HTTPMethod = "POST"
-        request.HTTPBody = NSJSONSerialization.dataWithJSONObject(body, options: NSJSONWritingOptions.allZeros, error: nil)
+        
+        try request.HTTPBody = NSJSONSerialization.dataWithJSONObject(body, options: NSJSONWritingOptions())
+        
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         
-        var session = NSURLSession.sharedSession()
-        var task = session.dataTaskWithRequest(request) {
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request) {
             (data, response, error) -> Void in
             
             if error != nil {
-                callback("", error.localizedDescription)
+                callback("", error!.localizedDescription)
             } else {
-                var result: NSDictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: nil) as NSDictionary
+                let result: NSDictionary = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
                 
-                let token: String? = result["token"] as String?
+                let token: String? = result["token"] as! String?
                 if  token != nil {
                     callback(token!, nil)
                 } else {

@@ -39,7 +39,7 @@ class EventTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> EventTableViewCell {
         let cellIdentifier = "EventTableViewCell"
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as EventTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! EventTableViewCell
 
         // Fetches the appropriate event for the data source layout.
         let event = events[indexPath.row]
@@ -58,44 +58,50 @@ class EventTableViewController: UITableViewController {
     */
     func loadUpcomingEvents() -> Void {
         
-        // Get all the upcoming events
-        EventDao.getUpcoming() {
-            (upcomingEvents, error) -> Void in
+        //do {
+            // Get all the upcoming events
+            EventDao.getUpcoming() {
+                (upcomingEvents, error) -> Void in
             
-            if(upcomingEvents != nil) {
+                if(upcomingEvents != nil) {
             
-                // Loop through all the events
-                for currentEvent in upcomingEvents! {
+                    // Loop through all the events
+                    for currentEvent in upcomingEvents! {
                 
-                    let name = currentEvent["name"] as NSString
-                    let start = currentEvent["start"] as NSString
-                    let teamId = currentEvent["team_id"] as NSNumber
+                        let name = currentEvent["name"] as! NSString
+                        let start = currentEvent["start"] as! NSString
+                        let teamId = currentEvent["team_id"] as! Int
 
-                    // Format date format
-                    let dateFormatter = NSDateFormatter()
-                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-                    let date = dateFormatter.dateFromString(start)
-                    dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
-                    dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
-                    let formattedDate = dateFormatter.stringFromDate(date!)
-                    
-                    TeamDao.getTeamInfo(teamId) {
-                        (teamInfo, error) -> Void in
+                        // Format date format
+                        let dateFormatter = NSDateFormatter()
+                        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                        let date = dateFormatter.dateFromString(start as String)
+                        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+                        dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
+                        let formattedDate = dateFormatter.stringFromDate(date!)
                         
-                        var teamDict = teamInfo as Dictionary?
-                        let teamName = teamDict!["name"]! as NSString
-                        let team = Team(id: teamId, name: teamName)
-                        let event = Event(name: name, team: team, time: formattedDate)
-                        
-                        self.events.append(event)
-                        
-                        dispatch_async(dispatch_get_main_queue()) {
-                            self.tableView.reloadData()
+                        do {
+                            try TeamDao.getTeamInfo(teamId) {
+                                (teamInfo, error) -> Void in
+                                
+                                var teamDict = teamInfo as Dictionary?
+                                let teamName = teamDict!["name"]! as! NSString
+                                let team = Team(id: teamId, name: teamName as String)
+                                let event = Event(name: name as String, team: team, time: formattedDate)
+                                
+                                self.events.append(event)
+                                
+                                dispatch_async(dispatch_get_main_queue()) {
+                                    self.tableView.reloadData()
+                                }
+                            }
+                        } catch {
+                            print("Error fetching teamInfo")
                         }
                     }
                 }
             }
-        }
+        
     }
 
 

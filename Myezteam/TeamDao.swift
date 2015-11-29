@@ -15,23 +15,23 @@ struct TeamDao {
     /**
         Gets the team info from the team id
     */
-    static func getTeamInfo(id: Int, callback: (NSDictionary?, String?) -> Void) {
+    static func getTeamInfo(id: Int, callback: (NSDictionary?, String?) -> Void) throws {
 
-        var request = NSMutableURLRequest(URL: NSURL(string: Constants.makeUrl("/teams/\(id)")))
+        let request = NSMutableURLRequest(URL: NSURL(string: Constants.makeUrl("/teams/\(id)"))!)
         request.HTTPMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         let token = NSUserDefaults.standardUserDefaults().stringForKey("myezteamToken")
         request.addValue("Bearer \(token!)", forHTTPHeaderField: "Authorization")
         
-        var session = NSURLSession.sharedSession()
-        var task = session.dataTaskWithRequest(request) {
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request) {
             (data, response, error) -> Void in
             
             if error != nil {
-                callback(nil, error.localizedDescription)
+                callback(nil, error!.localizedDescription)
             } else {
-                var teamInfo: NSDictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: nil) as NSDictionary
+                let teamInfo: NSDictionary = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
                 callback(teamInfo, nil)
             }
         }

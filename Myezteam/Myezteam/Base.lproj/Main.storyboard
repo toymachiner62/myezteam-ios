@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F1066" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -15,8 +16,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventTableViewCell" rowHeight="90" id="XfF-Tl-HPO" customClass="EventTableViewCell" customModule="Myezteam" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="86" width="600" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XfF-Tl-HPO" id="wVn-0x-XIv">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="89"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Game" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SvU-Cm-O2S">
@@ -119,8 +122,10 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="C3f-yX-ac9" firstAttribute="leading" secondItem="tpC-XR-9rc" secondAttribute="leading" id="020-Ip-5Te"/>
                             <constraint firstItem="qtC-Mo-74E" firstAttribute="trailing" secondItem="y3c-jy-aDJ" secondAttribute="trailing" id="0bT-Xe-Ala"/>
+                            <constraint firstItem="C3f-yX-ac9" firstAttribute="leading" secondItem="tpC-XR-9rc" secondAttribute="leading" id="1pa-5a-6F6"/>
+                            <constraint firstItem="C3f-yX-ac9" firstAttribute="centerX" secondItem="qtC-Mo-74E" secondAttribute="centerX" id="1vj-o8-gd8"/>
+                            <constraint firstItem="qtC-Mo-74E" firstAttribute="centerX" secondItem="ejQ-C7-Jmi" secondAttribute="centerX" id="1yz-ii-ou9"/>
                             <constraint firstItem="qtC-Mo-74E" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="5rc-O2-Z87"/>
                             <constraint firstItem="tpC-XR-9rc" firstAttribute="leading" secondItem="Yn6-ma-LWK" secondAttribute="leading" id="7GM-DK-y1s"/>
                             <constraint firstItem="ejQ-C7-Jmi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="7nH-1U-i2P"/>
@@ -128,13 +133,29 @@
                             <constraint firstItem="Yn6-ma-LWK" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="G1A-Sa-ABO"/>
                             <constraint firstItem="tpC-XR-9rc" firstAttribute="top" secondItem="Yn6-ma-LWK" secondAttribute="bottom" constant="8" symbolic="YES" id="G2D-xR-vs0"/>
                             <constraint firstItem="tpC-XR-9rc" firstAttribute="trailing" secondItem="Yn6-ma-LWK" secondAttribute="trailing" id="Htf-sD-kHy"/>
+                            <constraint firstItem="qtC-Mo-74E" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="IsZ-0F-1GU"/>
+                            <constraint firstItem="C3f-yX-ac9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-4" id="JW8-1w-qoZ"/>
                             <constraint firstItem="ejQ-C7-Jmi" firstAttribute="centerX" secondItem="Yn6-ma-LWK" secondAttribute="centerX" id="KbJ-zn-UeV"/>
+                            <constraint firstItem="C3f-yX-ac9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-4" id="NSg-8A-K2s"/>
                             <constraint firstItem="qtC-Mo-74E" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="VWU-Rr-QsB"/>
-                            <constraint firstItem="C3f-yX-ac9" firstAttribute="trailing" secondItem="tpC-XR-9rc" secondAttribute="trailing" id="heq-nv-HA6"/>
-                            <constraint firstItem="C3f-yX-ac9" firstAttribute="top" secondItem="tpC-XR-9rc" secondAttribute="bottom" constant="8" symbolic="YES" id="mza-45-KkA"/>
+                            <constraint firstItem="C3f-yX-ac9" firstAttribute="trailing" secondItem="tpC-XR-9rc" secondAttribute="trailing" id="e59-mE-HS1"/>
+                            <constraint firstItem="qtC-Mo-74E" firstAttribute="centerX" secondItem="tpC-XR-9rc" secondAttribute="centerX" id="fLq-Ax-tbP"/>
                             <constraint firstItem="Yn6-ma-LWK" firstAttribute="top" secondItem="ejQ-C7-Jmi" secondAttribute="bottom" constant="8" symbolic="YES" id="peX-eK-MoI"/>
+                            <constraint firstItem="C3f-yX-ac9" firstAttribute="top" secondItem="tpC-XR-9rc" secondAttribute="bottom" constant="8" symbolic="YES" id="q3p-Yi-vzd"/>
+                            <constraint firstItem="C3f-yX-ac9" firstAttribute="trailing" secondItem="tpC-XR-9rc" secondAttribute="trailing" id="wkd-Rz-orD"/>
                             <constraint firstItem="ejQ-C7-Jmi" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="188" id="x1t-Wb-Mjp"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="0bT-Xe-Ala"/>
+                                <exclude reference="CEP-ZO-Cpr"/>
+                                <exclude reference="G1A-Sa-ABO"/>
+                                <exclude reference="Htf-sD-kHy"/>
+                                <exclude reference="1vj-o8-gd8"/>
+                                <exclude reference="NSg-8A-K2s"/>
+                                <exclude reference="e59-mE-HS1"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Your Events" id="TkH-pc-haZ">
                         <barButtonItem key="rightBarButtonItem" title="Item" id="Wv4-pG-lWM"/>

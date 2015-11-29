@@ -40,15 +40,16 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     @IBAction func login(sender: UIButton) {
         
-       var user = User(email: self.email.text, password: self.password.text)
+       let user = User(email: self.email.text!, password: self.password.text!)
         
+        do {
         // Authenticate the user
-        user.authenticate() {
+        try user.authenticate() {
             (token, error) -> Void in
 
             // If there is an error, display it
             if error != nil {
-                var alert = UIAlertController(title: "Error", message: "Unable to login. Please try again", preferredStyle: UIAlertControllerStyle.Alert)
+                let alert = UIAlertController(title: "Error", message: "Unable to login. Please try again", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
                 dispatch_async(dispatch_get_main_queue()) {
                     self.presentViewController(alert, animated: true, completion: nil)
@@ -59,11 +60,14 @@ class LoginController: UIViewController, UITextFieldDelegate {
                 defaults.setObject(token, forKey: "myezteamToken")
                 
                 // Go to events page
-                var next = self.storyboard?.instantiateViewControllerWithIdentifier("EventTableViewController") as EventTableViewController
+                let next = self.storyboard?.instantiateViewControllerWithIdentifier("EventTableViewController") as! EventTableViewController
                 dispatch_async(dispatch_get_main_queue()) {
                     self.presentViewController(next, animated: true, completion: nil)
                 }
             }
+        }
+        } catch {
+            print(error);
         }
     }
 
