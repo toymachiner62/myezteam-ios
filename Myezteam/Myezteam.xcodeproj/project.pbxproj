@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		258EBEBC1C16049F0039E31D /* AppIcon.appiconset in Resources */ = {isa = PBXBuildFile; fileRef = 258EBEBB1C16049F0039E31D /* AppIcon.appiconset */; };
+		258EBEBE1C1605070039E31D /* Contents.json in Resources */ = {isa = PBXBuildFile; fileRef = 258EBEBD1C1605070039E31D /* Contents.json */; };
 		4460701B1BFA71A800099330 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4460701A1BFA71A800099330 /* AppDelegate.swift */; };
 		4460701D1BFA71A800099330 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4460701C1BFA71A800099330 /* LoginController.swift */; };
 		446070201BFA71A800099330 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4460701E1BFA71A800099330 /* Main.storyboard */; };
@@ -36,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		258EBEBB1C16049F0039E31D /* AppIcon.appiconset */ = {isa = PBXFileReference; lastKnownFileType = folder; name = AppIcon.appiconset; path = ../../../Downloads/M_logo2/ios/AppIcon.appiconset; sourceTree = "<group>"; };
+		258EBEBD1C1605070039E31D /* Contents.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Contents.json; path = ../../../Downloads/M_logo2/ios/AppIcon.appiconset/Contents.json; sourceTree = "<group>"; };
 		446070151BFA71A800099330 /* Myezteam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Myezteam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		446070191BFA71A800099330 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4460701A1BFA71A800099330 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +81,8 @@
 		4460700C1BFA71A800099330 = {
 			isa = PBXGroup;
 			children = (
+				258EBEBD1C1605070039E31D /* Contents.json */,
+				258EBEBB1C16049F0039E31D /* AppIcon.appiconset */,
 				446070171BFA71A800099330 /* Myezteam */,
 				4460702D1BFA71A800099330 /* MyezteamTests */,
 				446070161BFA71A800099330 /* Products */,
@@ -214,6 +220,7 @@
 				TargetAttributes = {
 					446070141BFA71A800099330 = {
 						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = PAD355V69L;
 					};
 					446070291BFA71A800099330 = {
 						CreatedOnToolsVersion = 6.0.1;
@@ -245,7 +252,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				258EBEBC1C16049F0039E31D /* AppIcon.appiconset in Resources */,
 				446070201BFA71A800099330 /* Main.storyboard in Resources */,
+				258EBEBE1C1605070039E31D /* Contents.json in Resources */,
 				446070251BFA71A800099330 /* LaunchScreen.xib in Resources */,
 				446070221BFA71A800099330 /* Images.xcassets in Resources */,
 			);
@@ -402,10 +411,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Myezteam/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.myezteam.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.myezteam.Myezteam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -413,10 +426,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Myezteam/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.myezteam.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.myezteam.Myezteam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
