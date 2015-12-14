@@ -91,6 +91,11 @@ class EventTableViewController: UITableViewController {
                                 
                                 self.events.append(event)
                                 
+                                // Sort the array b/c it loses order probably due to the TeamDao.getTeamInfo async method
+                                self.events.sortInPlace{(event1:Event, event2:Event) -> Bool in
+                                 event1.time < event2.time
+                                }
+                                
                                 dispatch_async(dispatch_get_main_queue()) {
                                     self.tableView.reloadData()
                                 }
