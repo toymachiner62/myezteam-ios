@@ -15,13 +15,15 @@ class Event {
     var name: String
     var team: Team
     var time: String
+    var myResponse: String
     
     // MARK: Initialization
     
-    init(name: String, team: Team, time: String) {
+    init(name: String, team: Team, time: String, myResponse: String) {
         self.name = name
         self.team = team
         self.time = time
+        self.myResponse = myResponse
     }
     
 }

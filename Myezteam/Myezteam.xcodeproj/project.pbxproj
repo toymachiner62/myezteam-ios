@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		258EBEBC1C16049F0039E31D /* AppIcon.appiconset in Resources */ = {isa = PBXBuildFile; fileRef = 258EBEBB1C16049F0039E31D /* AppIcon.appiconset */; };
 		258EBEBE1C1605070039E31D /* Contents.json in Resources */ = {isa = PBXBuildFile; fileRef = 258EBEBD1C1605070039E31D /* Contents.json */; };
+		25A8DA8F1C1F87510086A660 /* ResponseDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A8DA8E1C1F87510086A660 /* ResponseDao.swift */; };
 		4460701B1BFA71A800099330 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4460701A1BFA71A800099330 /* AppDelegate.swift */; };
 		4460701D1BFA71A800099330 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4460701C1BFA71A800099330 /* LoginController.swift */; };
 		446070201BFA71A800099330 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4460701E1BFA71A800099330 /* Main.storyboard */; };
@@ -40,6 +41,7 @@
 /* Begin PBXFileReference section */
 		258EBEBB1C16049F0039E31D /* AppIcon.appiconset */ = {isa = PBXFileReference; lastKnownFileType = folder; name = AppIcon.appiconset; path = ../../../Downloads/M_logo2/ios/AppIcon.appiconset; sourceTree = "<group>"; };
 		258EBEBD1C1605070039E31D /* Contents.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Contents.json; path = ../../../Downloads/M_logo2/ios/AppIcon.appiconset/Contents.json; sourceTree = "<group>"; };
+		25A8DA8E1C1F87510086A660 /* ResponseDao.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseDao.swift; sourceTree = "<group>"; };
 		446070151BFA71A800099330 /* Myezteam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Myezteam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		446070191BFA71A800099330 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4460701A1BFA71A800099330 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 			children = (
 				446636B61C04CB5F004595A9 /* EventDao.swift */,
 				446636B81C04CBE4004595A9 /* TeamDao.swift */,
+				25A8DA8E1C1F87510086A660 /* ResponseDao.swift */,
 			);
 			name = Daos;
 			path = ..;
@@ -283,6 +286,7 @@
 				44B4CBD51BFF7E7400EAAAF3 /* Team.swift in Sources */,
 				44C292C61BFCF872007D84C9 /* EventTableViewController.swift in Sources */,
 				44C292C81BFCF90F007D84C9 /* Event.swift in Sources */,
+				25A8DA8F1C1F87510086A660 /* ResponseDao.swift in Sources */,
 				44C292C11BFCCB46007D84C9 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

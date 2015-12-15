@@ -47,9 +47,18 @@ class EventTableViewController: UITableViewController {
         cell.gameLabel.text = event.name
         cell.teamLabel.text = event.team.name
         cell.timeLabel.text = event.time
+        cell.myResponseLabel.text = event.myResponse
+        
+        //cell.myResponseLabel.textColor = setTextColor(cell.myResponseLabel.text!)
+        
+        cell.myResponseLabel.backgroundColor = setTextColor(cell.myResponseLabel.text!)
+        cell.myResponseLabel.layer.cornerRadius = 4
+        cell.myResponseLabel.layer.masksToBounds = true
 
         return cell
     }
+    
+    
     
     // MARK: Functions
 
@@ -71,6 +80,7 @@ class EventTableViewController: UITableViewController {
                         let name = currentEvent["name"] as! NSString
                         let start = currentEvent["start"] as! NSString
                         let teamId = currentEvent["team_id"] as! Int
+                        let eventId = currentEvent["id"] as! Int
 
                         // Format date format
                         let dateFormatter = NSDateFormatter()
@@ -80,33 +90,162 @@ class EventTableViewController: UITableViewController {
                         dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
                         let formattedDate = dateFormatter.stringFromDate(date!)
                         
-                        do {
-                            try TeamDao.getTeamInfo(teamId) {
-                                (teamInfo, error) -> Void in
+                        
+                        self.getTeamInfo(teamId) {
+                            (team, err) -> Void in
+                            
+                            //print("
+                            
+                            self.getMyResponseForEvent(eventId) {
+                                (response, err) -> Void in
                                 
-                                var teamDict = teamInfo as Dictionary?
-                                let teamName = teamDict!["name"]! as! NSString
-                                let team = Team(id: teamId, name: teamName as String)
-                                let event = Event(name: name as String, team: team, time: formattedDate)
+                                //print("response = ")
+                                //print(response)
                                 
-                                self.events.append(event)
+                                //let myResponse = response
+                                
+                                //print("myresponse = ")
+                                //print(myResponse!)
+                                
+                                //print("myresponse.response = ")
+                                //print(myResponse["response"])
+                                
+                                var event: Event
+                                
+                                if (response == nil) {
+                                    event = Event(name: team!.name! as String, team: team!, time: formattedDate, myResponse: "No Response")
+                                } else {
+                                    event = Event(name: team!.name! as String, team: team!, time: formattedDate, myResponse: response!)
+                                }
                                 
                                 // Sort the array b/c it loses order probably due to the TeamDao.getTeamInfo async method
                                 self.events.sortInPlace{(event1:Event, event2:Event) -> Bool in
-                                 event1.time < event2.time
+                                    event1.time < event2.time
                                 }
+                                
+                                self.events.append(event)
                                 
                                 dispatch_async(dispatch_get_main_queue()) {
                                     self.tableView.reloadData()
                                 }
+                                
                             }
-                        } catch {
-                            print("Error fetching teamInfo")
+                            
+                            
                         }
+//                        do {
+//                            try TeamDao.getTeamInfo(teamId) {
+//                                (teamInfo, error) -> Void in
+//                                
+//                                var teamDict = teamInfo as Dictionary?
+//                                let teamName = teamDict!["name"]! as! NSString
+//                                let team = Team(id: teamId, name: teamName as String)
+//                                let event = Event(name: name as String, team: team, time: formattedDate)
+//                                
+//                                self.events.append(event)
+//                                
+//                                // Sort the array b/c it loses order probably due to the TeamDao.getTeamInfo async method
+//                                self.events.sortInPlace{(event1:Event, event2:Event) -> Bool in
+//                                    event1.time < event2.time
+//                                }
+//                                
+//                                dispatch_async(dispatch_get_main_queue()) {
+//                                    self.tableView.reloadData()
+//                                }
+//                            }
+//                        } catch {
+//                            print("Error fetching teamInfo")
+//                        }
                     }
                 }
             }
         
+    }
+    
+    /**
+        Gets a team's info based on a team id
+    */
+    func getTeamInfo(teamId: Int, callback: (Team?, String?) -> Void) {
+        do {
+            try TeamDao.getTeamInfo(teamId) {
+                (teamInfo, error) -> Void in
+                
+                var teamDict = teamInfo as Dictionary?
+                let teamName = teamDict!["name"]! as! NSString
+                let team = Team(id: teamId, name: teamName as String)
+                //let event = Event(name: name as String, team: team, time: formattedDate)
+                
+                callback(team, nil)
+            }
+        } catch {
+            print("Error fetching teamInfo")
+        }
+    }
+    
+    /**
+        Gets a team's info based on a team id
+     */
+    func getMyResponseForEvent(eventId: Int, callback: (String?, String?) -> Void) {
+        do {
+            try ResponseDao.getMineForEvent(eventId) {
+                (responses, error) -> Void in
+                
+                //var teamDict = teamInfo as Dictionary?
+                //let teamName = teamDict!["name"]! as! NSString
+                //let team = Team(id: teamId, name: teamName as String)
+                //let response = responses![0] as! Dictionary<String, NSObject>
+                //print("responses = ")
+                //print(responses)
+                
+                print("")
+                print("")
+                
+                print("responses = ")
+                print(responses)
+                
+                //if let response: NSDictionary = responses![0] as? NSDictionary where !responses.isEmpty {
+                let responses = responses as Array?
+                if(!responses!.isEmpty) {
+                    let response = responses![0]
+                    
+                    print("single response = ")
+                    print(response["created"])
+                    print(response["response"]!!["label"]!)
+                    
+                    callback(response["response"]!!["label"]! as! String?, nil)
+                } else {
+                    callback(nil, nil)
+                }
+                
+                
+                //let event = Event(name: name as String, team: team, time: formattedDate)
+                
+                //print(response)
+                
+                //callback(response as! Dictionary<String, NSObject>, nil)
+            }
+        } catch {
+            print("Error fetching responses")
+        }
+    }
+    
+    /**
+        Return a color based on the response
+     */
+    func setTextColor(response: String) -> UIColor {
+        if(response == "No Response") {
+            return UIColor.darkGrayColor()
+        } else if(response == "Yes") {
+            return UIColor.greenColor()
+        } else if(response == "Probably") {
+            return UIColor.yellowColor()
+        } else if(response == "Maybe") {
+            return UIColor.orangeColor()
+        } else if(response == "No") {
+            return UIColor.redColor()
+        } else {
+            return UIColor.darkGrayColor()
+        }
     }
 
 
