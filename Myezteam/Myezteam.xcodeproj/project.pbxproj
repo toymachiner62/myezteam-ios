@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		258EBEBC1C16049F0039E31D /* AppIcon.appiconset in Resources */ = {isa = PBXBuildFile; fileRef = 258EBEBB1C16049F0039E31D /* AppIcon.appiconset */; };
-		258EBEBE1C1605070039E31D /* Contents.json in Resources */ = {isa = PBXBuildFile; fileRef = 258EBEBD1C1605070039E31D /* Contents.json */; };
 		25A8DA8F1C1F87510086A660 /* ResponseDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A8DA8E1C1F87510086A660 /* ResponseDao.swift */; };
+		440745961C46C2F600540F71 /* Contents.json in Resources */ = {isa = PBXBuildFile; fileRef = 440745951C46C2F600540F71 /* Contents.json */; };
+		440745981C46C30B00540F71 /* AppIcon.appiconset in Resources */ = {isa = PBXBuildFile; fileRef = 440745971C46C30B00540F71 /* AppIcon.appiconset */; };
 		4460701B1BFA71A800099330 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4460701A1BFA71A800099330 /* AppDelegate.swift */; };
 		4460701D1BFA71A800099330 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4460701C1BFA71A800099330 /* LoginController.swift */; };
 		446070201BFA71A800099330 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4460701E1BFA71A800099330 /* Main.storyboard */; };
@@ -39,9 +39,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		258EBEBB1C16049F0039E31D /* AppIcon.appiconset */ = {isa = PBXFileReference; lastKnownFileType = folder; name = AppIcon.appiconset; path = ../../../Downloads/M_logo2/ios/AppIcon.appiconset; sourceTree = "<group>"; };
-		258EBEBD1C1605070039E31D /* Contents.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Contents.json; path = ../../../Downloads/M_logo2/ios/AppIcon.appiconset/Contents.json; sourceTree = "<group>"; };
 		25A8DA8E1C1F87510086A660 /* ResponseDao.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseDao.swift; sourceTree = "<group>"; };
+		440745951C46C2F600540F71 /* Contents.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Contents.json; path = Myezteam/Images.xcassets/Contents.json; sourceTree = "<group>"; };
+		440745971C46C30B00540F71 /* AppIcon.appiconset */ = {isa = PBXFileReference; lastKnownFileType = folder; name = AppIcon.appiconset; path = Myezteam/Images.xcassets/AppIcon.appiconset; sourceTree = "<group>"; };
 		446070151BFA71A800099330 /* Myezteam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Myezteam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		446070191BFA71A800099330 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4460701A1BFA71A800099330 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -83,8 +83,8 @@
 		4460700C1BFA71A800099330 = {
 			isa = PBXGroup;
 			children = (
-				258EBEBD1C1605070039E31D /* Contents.json */,
-				258EBEBB1C16049F0039E31D /* AppIcon.appiconset */,
+				440745971C46C30B00540F71 /* AppIcon.appiconset */,
+				440745951C46C2F600540F71 /* Contents.json */,
 				446070171BFA71A800099330 /* Myezteam */,
 				4460702D1BFA71A800099330 /* MyezteamTests */,
 				446070161BFA71A800099330 /* Products */,
@@ -255,11 +255,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				258EBEBC1C16049F0039E31D /* AppIcon.appiconset in Resources */,
 				446070201BFA71A800099330 /* Main.storyboard in Resources */,
-				258EBEBE1C1605070039E31D /* Contents.json in Resources */,
 				446070251BFA71A800099330 /* LaunchScreen.xib in Resources */,
 				446070221BFA71A800099330 /* Images.xcassets in Resources */,
+				440745981C46C30B00540F71 /* AppIcon.appiconset in Resources */,
+				440745961C46C2F600540F71 /* Contents.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

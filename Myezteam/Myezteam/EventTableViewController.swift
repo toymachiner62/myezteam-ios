@@ -47,13 +47,14 @@ class EventTableViewController: UITableViewController {
         cell.gameLabel.text = event.name
         cell.teamLabel.text = event.team.name
         cell.timeLabel.text = event.time
+        cell.descriptionLabel.text = event.description
         cell.myResponseLabel.text = event.myResponse
         
         //cell.myResponseLabel.textColor = setTextColor(cell.myResponseLabel.text!)
         
         cell.myResponseLabel.backgroundColor = setTextColor(cell.myResponseLabel.text!)
-        cell.myResponseLabel.layer.cornerRadius = 4
-        cell.myResponseLabel.layer.masksToBounds = true
+        //cell.myResponseLabel.layer.cornerRadius = 4
+        //cell.myResponseLabel.layer.masksToBounds = true
 
         return cell
     }
@@ -76,17 +77,18 @@ class EventTableViewController: UITableViewController {
             
                     // Loop through all the events
                     for currentEvent in upcomingEvents! {
-                
+                        
                         let name = currentEvent["name"] as! NSString
                         let start = currentEvent["start"] as! NSString
                         let teamId = currentEvent["team_id"] as! Int
+                        let eventDescription = currentEvent["description"] as? String
                         let eventId = currentEvent["id"] as! Int
 
                         // Format date format
                         let dateFormatter = NSDateFormatter()
                         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
                         let date = dateFormatter.dateFromString(start as String)
-                        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+                        dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
                         dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
                         let formattedDate = dateFormatter.stringFromDate(date!)
                         
@@ -94,28 +96,17 @@ class EventTableViewController: UITableViewController {
                         self.getTeamInfo(teamId) {
                             (team, err) -> Void in
                             
-                            //print("
-                            
                             self.getMyResponseForEvent(eventId) {
                                 (response, err) -> Void in
                                 
-                                //print("response = ")
-                                //print(response)
-                                
-                                //let myResponse = response
-                                
-                                //print("myresponse = ")
-                                //print(myResponse!)
-                                
-                                //print("myresponse.response = ")
-                                //print(myResponse["response"])
+                                print(eventDescription)
                                 
                                 var event: Event
                                 
                                 if (response == nil) {
-                                    event = Event(name: team!.name! as String, team: team!, time: formattedDate, myResponse: "No Response")
+                                    event = Event(name: name as String, team: team!, time: formattedDate, description: eventDescription ?? "", myResponse: "No Response")
                                 } else {
-                                    event = Event(name: team!.name! as String, team: team!, time: formattedDate, myResponse: response!)
+                                    event = Event(name: name as String, team: team!, time: formattedDate, description: eventDescription ?? "", myResponse: response!)
                                 }
                                 
                                 // Sort the array b/c it loses order probably due to the TeamDao.getTeamInfo async method
