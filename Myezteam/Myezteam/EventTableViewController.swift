@@ -19,6 +19,7 @@ class EventTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         loadUpcomingEvents()
     }
 
@@ -50,12 +51,76 @@ class EventTableViewController: UITableViewController {
         cell.descriptionLabel.text = event.description
         cell.myResponseLabel.text = event.myResponse
         
-        //cell.myResponseLabel.textColor = setTextColor(cell.myResponseLabel.text!)
-        
         cell.myResponseLabel.backgroundColor = setTextColor(cell.myResponseLabel.text!)
         cell.myResponseLabel.layer.cornerRadius = 4
-        //cell.myResponseLabel.sizeToFit();
+        
+        // Gradient colors
+        let topColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
+        let bottomColor = UIColor(red: (92/255.0), green: (92/255.0), blue: (92/255.0), alpha: 1)
+        
+        let gradientColors: [CGColor] = [topColor.CGColor, bottomColor.CGColor]
+        let gradientLocations: [Float] = [0.0, 1.0]
+        
+        let gradientLayer: CAGradientLayer = CAGradientLayer()
+        gradientLayer.colors = gradientColors
+        gradientLayer.locations = gradientLocations
+        
+        gradientLayer.frame = cell.bounds
+        //gradientLayer.frame = self.view.bounds
+        //self.tableView.layer.insertSublayer(gradientLayer, atIndex: 0)
+        cell.layer.insertSublayer(gradientLayer, atIndex: 0)
+        
+        //let separator = UIView()
+        //separator.backgroundColor = UIColor(red: (60/255.0), green: (60/255.0), blue: (60/255.0), alpha: 1)
+        
+        //cell.addSubview(separator)
+        
+        
+        let additionalSeparatorThickness = CGFloat(1)
+        let topDarkSeparator = UIView(frame: CGRectMake(0,
+            cell.frame.size.height - additionalSeparatorThickness,
+            cell.frame.size.width - 90,
+            additionalSeparatorThickness))
+        
+        let bottomDarkSeparator = UIView(frame: CGRectMake(1,
+            cell.frame.size.height,
+            cell.frame.size.width - 90,
+            additionalSeparatorThickness))
+        
+        let topLightSeparator = UIView(frame: CGRectMake(0,
+            cell.frame.size.height - additionalSeparatorThickness,
+            90,
+            additionalSeparatorThickness))
+        
+        let bottomLightSeparator = UIView(frame: CGRectMake(1,
+            cell.frame.size.height,
+            88,
+            additionalSeparatorThickness))
+        
 
+        topDarkSeparator.frame.insetInPlace(dx: CGFloat(-90), dy: CGFloat(0))
+        bottomDarkSeparator.frame.insetInPlace(dx: CGFloat(-90), dy: CGFloat(0))
+        //topLightSeparator.frame.insetInPlace(dx: CGFloat(0), dy: CGFloat(0))
+        bottomLightSeparator.frame.insetInPlace(dx: CGFloat(-1), dy: CGFloat(0))
+        
+        if(indexPath.row + 1 != events.count) {
+        
+            topDarkSeparator.backgroundColor = UIColor(red: (80/255.0), green: (80/255.0), blue: (80/255.0), alpha: 1)
+            cell.addSubview(topDarkSeparator)
+            
+            bottomDarkSeparator.backgroundColor = UIColor(red: (95/255.0), green: (95/255.0), blue: (95/255.0), alpha: 1)
+            cell.addSubview(bottomDarkSeparator)
+            
+            topLightSeparator.backgroundColor = UIColor(red: (245/255.0), green: (245/255.0), blue: (245/255.0), alpha: 1)
+            cell.addSubview(topLightSeparator)
+            
+            bottomLightSeparator.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+            cell.addSubview(bottomLightSeparator)
+        }
+        
+        
+        
+        
         return cell
     }
     
