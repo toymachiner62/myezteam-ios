@@ -53,8 +53,8 @@ class EventTableViewController: UITableViewController {
         //cell.myResponseLabel.textColor = setTextColor(cell.myResponseLabel.text!)
         
         cell.myResponseLabel.backgroundColor = setTextColor(cell.myResponseLabel.text!)
-        //cell.myResponseLabel.layer.cornerRadius = 4
-        //cell.myResponseLabel.layer.masksToBounds = true
+        cell.myResponseLabel.layer.cornerRadius = 4
+        //cell.myResponseLabel.sizeToFit();
 
         return cell
     }
